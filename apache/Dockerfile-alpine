@@ -1,5 +1,8 @@
 ARG APACHE_VERSION="2.4"
-FROM httpd:${APACHE_VERSION:+${APACHE_VERSION}}
+FROM httpd:${APACHE_VERSION:+${APACHE_VERSION}-}alpine
+
+RUN apk update; \
+    apk upgrade;
 
 # Copy apache vhost file to proxy php requests to php-fpm container
 COPY demo.apache.conf /etc/apache2/sites-available/demo.apache.conf
